@@ -45,50 +45,15 @@ function ValidateEmail(mail)
   }
 }
 
-//NEW
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
 
-//NEW
+
 function checkemailtype(email){
   if (email.match(/\.(jpe?g|png|pdf|jpg|js|css|io|gif)$/)){
     return false;
   }else{
-
-
-    if (validateEmail(email)) {
-        return true;
-      } else {
-        return false;
-
-      }
-
-
+    return true;
   }
 }
-
-
-function cfDecodeEmail(encodedString) {
-    var email = "", r = parseInt(encodedString.substr(0, 2), 16), n, i;
-    for (n = 2; encodedString.length - n; n += 2){
-    	i = parseInt(encodedString.substr(n, 2), 16) ^ r;
-		email += String.fromCharCode(i);
-    }
-    return email;
-}
-
-// function checkemailtype(email){
-//   if (email.match(/\.(jpe?g|png|pdf|jpg|js|css|io|gif)$/)){
-//     return false;
-//   }else{
-//     return true;
-//   }
-// }
 
 function extractEmails (htmldata)
 {
@@ -177,19 +142,6 @@ function extractdomain(domain) {
                 }else{
                   //emails
                   setemail(extractEmails($.html()));
-
-
-
-                  //cfemail
-                  $('a[data-cfemail]').each((i, link) => {
-
-
-                      var result = Object.entries(link.attribs);
-                      // console.log(cfDecodeEmail(result[2][1]))
-                      if (varEmails.indexOf(cfDecodeEmail(result[2][1]))==-1) varEmails.push(cfDecodeEmail(result[2][1]));
-
-                      console.log(link.attribs)
-                  });
 
                   //tels
                   $('a[href^="tel:"]').each((i, link) => {
@@ -310,22 +262,9 @@ function extractdomain(domain) {
 
 
     // Queue a list of URLs
-   //  c.queue([
-   //    'http://'+domain,
-   //    'http://'+domain+'/contact-us/',
-   //    'http://'+domain+'/contactus/',
-   //    'http://'+domain+'/contact/',
-   //    'http://'+domain+'/pages/contact-us/',
-   //    'http://'+domain+'/pages/contactus/',
-   //    'http://'+domain+'/pages/contact/',
-   //    'http://'+domain+'/about-us/',
-   //    'http://'+domain+'/aboutus/',
-   // ]);
-
-   'http://'+domain,
+    c.queue([
+      'http://'+domain,
       'http://'+domain+'/contact-us/',
-      'http://'+domain+'/contact-us.html/',
-      'http://'+domain+'/contactus.html/',
       'http://'+domain+'/contactus/',
       'http://'+domain+'/contact/',
       'http://'+domain+'/pages/contact-us/',
@@ -333,7 +272,7 @@ function extractdomain(domain) {
       'http://'+domain+'/pages/contact/',
       'http://'+domain+'/about-us/',
       'http://'+domain+'/aboutus/',
-      'http://'+domain+'/about/',
+   ]);
 
 
     c.on('drain',function(){
