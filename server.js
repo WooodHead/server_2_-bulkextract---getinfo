@@ -244,8 +244,13 @@ app.get('/manualinsert',(req,res)=>{
 
 const PORT = process.env.PORT || 5002;
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on ${PORT}`)
-})
+//app.listen(PORT, ()=>{
+ //   console.log(`Server is running on ${PORT}`)
+//})
+
+
+app.listen(process.env.PORT || 5002, function(){
+  console.log("USER Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 // app.use('/api/bulkdomainextract',BulkDomainExtract);

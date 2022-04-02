@@ -1,11 +1,8 @@
-echo "# server_2_-bulkextract---getinfo" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/biswanathprasadsingh9/server_2_-bulkextract---getinfo.git
-git push -u origin main
-…or push an existing repository from the command line
-git remote add origin https://github.com/biswanathprasadsingh9/server_2_-bulkextract---getinfo.git
-git branch -M main
-git push -u origin main
+AWS Access key file
+Access Key ID:
+AKIAXQKLFJRKLWE6TMOG
+Secret Access Key:
+7lF+O7kYfnwP35NN7bZ0N5ohog2BL4PLjVkWPzDg
+
+
+serverless config credentials --provider aws --key AKIAXQKLFJRKLWE6TMOG --secret 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
