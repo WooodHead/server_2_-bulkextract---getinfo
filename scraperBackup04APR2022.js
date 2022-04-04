@@ -55,19 +55,6 @@ function checkemailtype(email){
   }
 }
 
-
-function cfDecodeEmail(encodedString) {
-  var email = "",
-    r = parseInt(encodedString.substr(0, 2), 16),
-    n,
-    i;
-  for (n = 2; encodedString.length - n; n += 2) {
-    i = parseInt(encodedString.substr(n, 2), 16) ^ r;
-    email += String.fromCharCode(i);
-  }
-  return email;
-}
-
 function extractEmails (htmldata)
 {
     return htmldata.match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
@@ -154,39 +141,7 @@ function extractdomain(domain) {
                 if(!$){
                 }else{
                   //emails
-                  // setemail(extractEmails($.html()));
-
-                  const ExtractEmail = require('extract-email');
-                  let dotwords = [".","[dot]","-dot-"];
-                  let atwords = ["@","[at]","-at-"];
-                  let res = ExtractEmail.String($.html(),atwords,dotwords);
-                  if(res.length>0){
-
-                    res.forEach((item, i) => {
-
-                      if (varEmails.indexOf(item.email) == -1)
-                        varEmails.push(item.email);
-
-                    });
-                  }
-
-                    //emails
-            $("a[data-cfemail]").each((i, link) => {
-              var result = Object.entries(link.attribs);
-              // console.log(cfDecodeEmail(result[2][1]))
-              if (varEmails.indexOf(cfDecodeEmail(result[2][1])) == -1)
-                varEmails.push(cfDecodeEmail(result[2][1]));
-
-              console.log(link.attribs);
-            });
-
-            $("span").each(function () {
-              var result = $(this).attr("data-cfemail");
-              if (result !== undefined) {
-                if (varEmails.indexOf(cfDecodeEmail(result)) == -1)
-                  varEmails.push(cfDecodeEmail(result));
-              }
-            });
+                  setemail(extractEmails($.html()));
 
                   //tels
                   $('a[href^="tel:"]').each((i, link) => {
