@@ -57,10 +57,15 @@ app.get('/',(req,res)=>{
 })
 
 
-app.get('/extract/:domain',(req,res)=>{
+app.get('/extract/:domain/:extracttype/:extractphone/:extractsocial',(req,res)=>{
 
   const DomainData = require('./models/DomainData');
   const DomainDataTemp = require('./models/DomainDataTemp');
+
+
+  var extractphone=req.params.extractphone==='true'?'yes':'no';
+  var extractsocial=req.params.extractsocial==='true'?'yes':'no';
+
 
 
   DomainData.findOne({domain:req.params.domain})
@@ -69,7 +74,7 @@ app.get('/extract/:domain',(req,res)=>{
 
 
       const promise = require("./scraper.js")
-      promise.extractdomain(req.params.domain).then((response) => {
+      promise.extractdomain(req.params.domain,req.params.extracttype,extractphone,extractsocial).then((response) => {
         // console.log(response)
         res.json({
           response
@@ -163,23 +168,23 @@ app.get('/manualemailupdate',(req,res)=>{
 app.get('/manualinsert',(req,res)=>{
     const DomainData = require('./models/DomainData');
 
-    var domainname='flowerhornfishstoreindia.com';
+    var domainname='qtonix.com';
 
     var mytmpdata={
       response:true,
       domain:domainname,
       status:'Found',
-      emails:['flowerhornfishstoreindia@gmail.com'],
-      tel:['+918847849963'],
-      facebook:[''],
+      emails:['hr@qtonix.com','info@qtonix.com','sales@qtonix.com','adam@qtonix.com','david@qtonix.com'],
+      tel:['+1-315-510-5120','+91-93488-78088','+44-11-5888-1166'],
+      facebook:['https://www.facebook.com/qtonix'],
       instagram:[],
-      twitter:[''],
-      linkedin:[''],
+      twitter:['https://twitter.com/SeoCompany_USA'],
+      linkedin:['https://www.linkedin.com/company/qtonix-software-pvt-ltd-/'],
       googleplus:[],
-      youtube:[''],
+      youtube:['https://www.youtube.com/embed/DkdHczrTrsk'],
       whatsapp:['https://chat.whatsapp.com/CS1xIHpkDmkD6bSGXplXgj'],
       printrest:[],
-      skype:[]
+      skype:[],
     }
 
     console.log(mytmpdata)
