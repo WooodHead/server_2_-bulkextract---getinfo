@@ -337,6 +337,7 @@ function extractdomain(domain) {
             printrest:varPrintRest,
             skype:varSkype
           }
+          console.log(dataas)
           Resolve(dataas)
     });
   })
