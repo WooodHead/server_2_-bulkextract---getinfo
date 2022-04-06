@@ -202,6 +202,8 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               $('a[href^="tel:"]').each((i, link) => {
                 // const href = link.attribs.href;
                 // var thref = href.substring(4);
+                
+
                 var tdataarray = [link.attribs.href.substring(4)];
                 tdataarray.forEach(function (value) {
                   if (varPhones.indexOf(value) == -1) varPhones.push(value);
@@ -212,6 +214,15 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
             if (extractsocial === "yes") {
               //facebook
               $('a[href^="https://www.facebook.com/"]').each((i, link) => {
+                // const href = link.attribs.href;
+                // var thref = href.substring(4);
+                var tdataarray = [link.attribs.href];
+                tdataarray.forEach(function (value) {
+                  if (varFacebooks.indexOf(value) == -1)
+                    varFacebooks.push(value);
+                });
+              });
+              $('a[href^="http://www.facebook.com/"]').each((i, link) => {
                 // const href = link.attribs.href;
                 // var thref = href.substring(4);
                 var tdataarray = [link.attribs.href];
@@ -259,6 +270,7 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
                   if (varTwitters.indexOf(value) == -1) varTwitters.push(value);
                 });
               });
+
 
               //linkedin
               $('a[href^="https://www.linkedin.com/"]').each((i, link) => {
