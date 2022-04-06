@@ -137,7 +137,7 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
 
     var Crawler = require("crawler");
     var c = new Crawler({
-      maxConnections: 11,
+      maxConnections: 20,
       // rateLimit: 500,
       // encoding:null,
       // jQuery:false,
@@ -202,7 +202,7 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               $('a[href^="tel:"]').each((i, link) => {
                 // const href = link.attribs.href;
                 // var thref = href.substring(4);
-                
+
 
                 var tdataarray = [link.attribs.href.substring(4)];
                 tdataarray.forEach(function (value) {
