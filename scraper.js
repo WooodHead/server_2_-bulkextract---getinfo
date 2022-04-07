@@ -161,223 +161,231 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
             // console.log(extractEmails($.html()))
 
 
-            const ExtractEmail = require('extract-email');
-            let dotwords = [".","[dot]","-dot-"];
-            let atwords = ["@","[at]","-at-"];
-            let res = ExtractEmail.String($.html(),atwords,dotwords);
-            if(res.length>0){
-
-              res.forEach((item, i) => {
-
-                if (varEmails.indexOf(item.email) == -1)
-                  varEmails.push(item.email);
-
-              });
-
-
-            }
 
 
 
-            //emails
-            $("a[data-cfemail]").each((i, link) => {
-              var result = Object.entries(link.attribs);
-              // console.log(cfDecodeEmail(result[2][1]))
-              if (varEmails.indexOf(cfDecodeEmail(result[2][1])) == -1)
-                varEmails.push(cfDecodeEmail(result[2][1]));
-
-              console.log(link.attribs);
-            });
-
-            $("span").each(function () {
-              var result = $(this).attr("data-cfemail");
-              if (result !== undefined) {
-                if (varEmails.indexOf(cfDecodeEmail(result)) == -1)
-                  varEmails.push(cfDecodeEmail(result));
+            if (typeof $.html() === 'string') {
+              const ExtractEmail = require('extract-email');
+              let dotwords = [".","[dot]","-dot-"];
+              let atwords = ["@","[at]","-at-"];
+              let res = ExtractEmail.String($.html(),atwords,dotwords);
+              if(res.length>0){
+                res.forEach((item, i) => {
+                  if (varEmails.indexOf(item.email) == -1)
+                    varEmails.push(item.email);
+                });
               }
-            });
-
-            if (extractphone === "yes") {
-              //tels
-              $('a[href^="tel:"]').each((i, link) => {
-                // const href = link.attribs.href;
-                // var thref = href.substring(4);
 
 
-                var tdataarray = [link.attribs.href.substring(4)];
-                tdataarray.forEach(function (value) {
-                  if (varPhones.indexOf(value) == -1) varPhones.push(value);
-                });
+              //emails
+              $("a[data-cfemail]").each((i, link) => {
+                var result = Object.entries(link.attribs);
+                // console.log(cfDecodeEmail(result[2][1]))
+                if (varEmails.indexOf(cfDecodeEmail(result[2][1])) == -1)
+                  varEmails.push(cfDecodeEmail(result[2][1]));
+
+                console.log(link.attribs);
               });
+
+              $("span").each(function () {
+                var result = $(this).attr("data-cfemail");
+                if (result !== undefined) {
+                  if (varEmails.indexOf(cfDecodeEmail(result)) == -1)
+                    varEmails.push(cfDecodeEmail(result));
+                }
+              });
+
+              if (extractphone === "yes") {
+                //tels
+                $('a[href^="tel:"]').each((i, link) => {
+                  // const href = link.attribs.href;
+                  // var thref = href.substring(4);
+
+
+                  var tdataarray = [link.attribs.href.substring(4)];
+                  tdataarray.forEach(function (value) {
+                    if (varPhones.indexOf(value) == -1) varPhones.push(value);
+                  });
+                });
+              }
+
+              if (extractsocial === "yes") {
+                //facebook
+                $('a[href^="https://www.facebook.com/"]').each((i, link) => {
+                  // const href = link.attribs.href;
+                  // var thref = href.substring(4);
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varFacebooks.indexOf(value) == -1)
+                      varFacebooks.push(value);
+                  });
+                });
+                $('a[href^="http://www.facebook.com/"]').each((i, link) => {
+                  // const href = link.attribs.href;
+                  // var thref = href.substring(4);
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varFacebooks.indexOf(value) == -1)
+                      varFacebooks.push(value);
+                  });
+                });
+                $('a[href^="https://facebook.com/"]').each((i, link) => {
+                  // const href = link.attribs.href;
+                  // var thref = href.substring(4);
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varFacebooks.indexOf(value) == -1)
+                      varFacebooks.push(value);
+                  });
+                });
+
+                //instagram
+                $('a[href^="https://www.instagram.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varInstagrams.indexOf(value) == -1)
+                      varInstagrams.push(value);
+                  });
+                });
+                $('a[href^="https://instagram.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varInstagrams.indexOf(value) == -1)
+                      varInstagrams.push(value);
+                  });
+                });
+
+                //twitter
+                $('a[href^="https://twitter.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varTwitters.indexOf(value) == -1) varTwitters.push(value);
+                  });
+                });
+                $('a[href^="https://www.twitter.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varTwitters.indexOf(value) == -1) varTwitters.push(value);
+                  });
+                });
+
+
+                //linkedin
+                $('a[href^="https://www.linkedin.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varLinkedins.indexOf(value) == -1)
+                      varLinkedins.push(value);
+                  });
+                });
+                $('a[href^="https://linkedin.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varLinkedins.indexOf(value) == -1)
+                      varLinkedins.push(value);
+                  });
+                });
+
+                //googleplus
+                $('a[href^="https://plus.google.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varGoogleplus.indexOf(value) == -1)
+                      varGoogleplus.push(value);
+                  });
+                });
+
+                //youtube
+                $('a[href^="https://www.youtube.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
+                  });
+                });
+                $('a[href^="https://youtube.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
+                  });
+                });
+                $('a[href^="https://youtu.be/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
+                  });
+                });
+
+                //tiktok
+                // https://www.tiktok.com/@lashify?lang=en
+
+                //yelp
+                // https://visiondental.com/
+
+                //snapchat
+                // $('a[href^="https://www.snapchat.com/"]').each((i, link) => {
+                //     var tdataarray=[link.attribs.href];
+                //     tdataarray.forEach(function(value){
+                //         if (varYoutube.indexOf(value)==-1) varYoutube.push(value);
+                //     });
+                // });
+                // $('a[href^="https://snapchat.com/"]').each((i, link) => {
+                //     var tdataarray=[link.attribs.href];
+                //     tdataarray.forEach(function(value){
+                //         if (varYoutube.indexOf(value)==-1) varYoutube.push(value);
+                //     });
+                // });
+                // https://bitarinstitute.com/
+
+                //whatsapp1
+                $('a[href^="https://chat.whatsapp.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
+                  });
+                });
+
+                //whatsapp2
+                $('a[href^="https://wa.me/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
+                  });
+                });
+
+                $('a[href^="//wa.me/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
+                  });
+                });
+
+                //pinterest
+                $('a[href^="http://pinterest.com/"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varPrintRest.indexOf(value) == -1)
+                      varPrintRest.push(value);
+                  });
+                });
+
+                //skype
+                $('a[href^="skype:"]').each((i, link) => {
+                  var tdataarray = [link.attribs.href];
+                  tdataarray.forEach(function (value) {
+                    if (varSkype.indexOf(value) == -1) varSkype.push(value);
+                  });
+                });
+              }
+
+
+
+            }else{
+
             }
 
-            if (extractsocial === "yes") {
-              //facebook
-              $('a[href^="https://www.facebook.com/"]').each((i, link) => {
-                // const href = link.attribs.href;
-                // var thref = href.substring(4);
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varFacebooks.indexOf(value) == -1)
-                    varFacebooks.push(value);
-                });
-              });
-              $('a[href^="http://www.facebook.com/"]').each((i, link) => {
-                // const href = link.attribs.href;
-                // var thref = href.substring(4);
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varFacebooks.indexOf(value) == -1)
-                    varFacebooks.push(value);
-                });
-              });
-              $('a[href^="https://facebook.com/"]').each((i, link) => {
-                // const href = link.attribs.href;
-                // var thref = href.substring(4);
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varFacebooks.indexOf(value) == -1)
-                    varFacebooks.push(value);
-                });
-              });
-
-              //instagram
-              $('a[href^="https://www.instagram.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varInstagrams.indexOf(value) == -1)
-                    varInstagrams.push(value);
-                });
-              });
-              $('a[href^="https://instagram.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varInstagrams.indexOf(value) == -1)
-                    varInstagrams.push(value);
-                });
-              });
-
-              //twitter
-              $('a[href^="https://twitter.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varTwitters.indexOf(value) == -1) varTwitters.push(value);
-                });
-              });
-              $('a[href^="https://www.twitter.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varTwitters.indexOf(value) == -1) varTwitters.push(value);
-                });
-              });
 
 
-              //linkedin
-              $('a[href^="https://www.linkedin.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varLinkedins.indexOf(value) == -1)
-                    varLinkedins.push(value);
-                });
-              });
-              $('a[href^="https://linkedin.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varLinkedins.indexOf(value) == -1)
-                    varLinkedins.push(value);
-                });
-              });
 
-              //googleplus
-              $('a[href^="https://plus.google.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varGoogleplus.indexOf(value) == -1)
-                    varGoogleplus.push(value);
-                });
-              });
-
-              //youtube
-              $('a[href^="https://www.youtube.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
-                });
-              });
-              $('a[href^="https://youtube.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
-                });
-              });
-              $('a[href^="https://youtu.be/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varYoutube.indexOf(value) == -1) varYoutube.push(value);
-                });
-              });
-
-              //tiktok
-              // https://www.tiktok.com/@lashify?lang=en
-
-              //yelp
-              // https://visiondental.com/
-
-              //snapchat
-              // $('a[href^="https://www.snapchat.com/"]').each((i, link) => {
-              //     var tdataarray=[link.attribs.href];
-              //     tdataarray.forEach(function(value){
-              //         if (varYoutube.indexOf(value)==-1) varYoutube.push(value);
-              //     });
-              // });
-              // $('a[href^="https://snapchat.com/"]').each((i, link) => {
-              //     var tdataarray=[link.attribs.href];
-              //     tdataarray.forEach(function(value){
-              //         if (varYoutube.indexOf(value)==-1) varYoutube.push(value);
-              //     });
-              // });
-              // https://bitarinstitute.com/
-
-              //whatsapp1
-              $('a[href^="https://chat.whatsapp.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
-                });
-              });
-
-              //whatsapp2
-              $('a[href^="https://wa.me/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
-                });
-              });
-
-              $('a[href^="//wa.me/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varWhatsapp.indexOf(value) == -1) varWhatsapp.push(value);
-                });
-              });
-
-              //pinterest
-              $('a[href^="http://pinterest.com/"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varPrintRest.indexOf(value) == -1)
-                    varPrintRest.push(value);
-                });
-              });
-
-              //skype
-              $('a[href^="skype:"]').each((i, link) => {
-                var tdataarray = [link.attribs.href];
-                tdataarray.forEach(function (value) {
-                  if (varSkype.indexOf(value) == -1) varSkype.push(value);
-                });
-              });
-            }
           }
         }
         done();
