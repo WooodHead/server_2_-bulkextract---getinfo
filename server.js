@@ -12,7 +12,6 @@ var timeout = require('connect-timeout')
 // ===DATABASE CONNECTION===
 mongoose.connect('mongodb+srv://mongodb:i6QpsrcM04zFhSKQ@cluster0.xeudb.mongodb.net/webemailextractor?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true});
 
-
 const db = mongoose.connection;
 db.on('error',(err)=>{
     console.log('Failed to connect.')
@@ -22,6 +21,8 @@ db.once('open',()=>{
     console.log('Successfully Connected.');
 })
 // ===DATABASE CONNECTION===
+
+
 
 
 
