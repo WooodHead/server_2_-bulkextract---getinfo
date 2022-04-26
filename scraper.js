@@ -67,15 +67,15 @@ const validateEmail = (email) => {
 };
 
 function checkemailtype(email) {
-  // if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
-  //   return false;
-  // } else {
+  if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
+    return false;
+  } else {
     if (ValidateEmail(email)) {
       return true;
     } else {
       return false;
     }
-  // }
+  }
 }
 
 function cfDecodeEmail(encodedString) {
@@ -181,7 +181,7 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               if(res.length>0){
                 res.forEach((item, i) => {
 
-                  if(checkemailtype(item.email)){
+                  if(ValidateEmail(item.email)){
                     if (varEmails.indexOf(item.email) == -1)
                       varEmails.push(item.email);
                   }
