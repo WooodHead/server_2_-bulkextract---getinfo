@@ -23,6 +23,8 @@ function ValidateEmail(mail) {
   // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
     if (mail.slice(-3) === "jpg") {
       return false;
+    } else if (mail.slice(-4) === "jpeg") {
+      return false;
     // } else if (mail.slice(-3) === "png") {
     //   return false;
     // } else if (mail.slice(-3) === "gif") {
@@ -61,15 +63,15 @@ const validateEmail = (email) => {
 };
 
 function checkemailtype(email) {
-  if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
-    return false;
-  } else {
+  // if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
+  //   return false;
+  // } else {
     if (ValidateEmail(email)) {
       return true;
     } else {
       return false;
     }
-  }
+  // }
 }
 
 function cfDecodeEmail(encodedString) {
