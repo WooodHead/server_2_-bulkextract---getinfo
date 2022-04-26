@@ -35,7 +35,7 @@ function ValidateEmail(mail) {
       return false;
     } else if (mail.slice(-9) === "email.com") {
       return false;
-    } else if (mail.slice(-9) === "sentry.io") {
+    } else if (mail.slice(-9) === "g") {
       return false;
     } else if (mail.slice(-26) === "sentry-viewer.wixpress.com") {
       return false;
