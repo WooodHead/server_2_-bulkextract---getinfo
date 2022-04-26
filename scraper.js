@@ -61,7 +61,7 @@ const validateEmail = (email) => {
 };
 
 function checkemailtype(email) {
-  if (email.match(/\.(jpe?g|png|pdf|jpg|js|css|io|gif)$/)) {
+  if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
     return false;
   } else {
     if (ValidateEmail(email)) {
