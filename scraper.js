@@ -20,33 +20,37 @@ function validatephone(phone) {
 }
 
 function ValidateEmail(mail) {
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+  // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
     if (mail.slice(-3) === "jpg") {
       return false;
-    } else if (mail.slice(-3) === "png") {
-      return false;
-    } else if (mail.slice(-3) === "gif") {
-      return false;
-    } else if (mail.slice(-3) === "css") {
-      return false;
-    } else if (mail.slice(-4) === "html") {
-      return false;
+    // } else if (mail.slice(-3) === "png") {
+    //   return false;
+    // } else if (mail.slice(-3) === "gif") {
+    //   return false;
+    // } else if (mail.slice(-3) === "css") {
+    //   return false;
+    // } else if (mail.slice(-4) === "html") {
+    //   return false;
     } else if (mail.slice(-11) === "example.com") {
       return false;
     } else if (mail.slice(-9) === "email.com") {
       return false;
     } else if (mail.slice(-9) === "sentry.io") {
       return false;
-    } else if (mail.slice(-2) === "js") {
+    } else if (mail.slice(-26) === "sentry-viewer.wixpress.com") {
       return false;
-    } else if (mail.slice(-4) === "jpeg") {
+    } else if (mail.slice(-24) === "sentry-next.wixpress.com") {
       return false;
+    // } else if (mail.slice(-2) === "js") {
+    //   return false;
+    // } else if (mail.slice(-4) === "jpeg") {
+    //   return false;
     } else {
       return true;
     }
-  } else {
-    return false;
-  }
+  // } else {
+  //   return false;
+  // }
 }
 
 const validateEmail = (email) => {
@@ -61,11 +65,11 @@ function checkemailtype(email) {
   if (email.match(/\.(jpe?g|png|pdf|jpg|js|css|io|gif)$/)) {
     return false;
   } else {
-    // if (validateEmail(email)) {
+    if (ValidateEmail(email)) {
       return true;
-    // } else {
-    //   return false;
-    // }
+    } else {
+      return false;
+    }
   }
 }
 
