@@ -61,11 +61,11 @@ function checkemailtype(email) {
   if (email.match(/\.(jpe?g|png|pdf|jpg|js|css|io|gif)$/)) {
     return false;
   } else {
-    if (validateEmail(email)) {
+    // if (validateEmail(email)) {
       return true;
-    } else {
-      return false;
-    }
+    // } else {
+    //   return false;
+    // }
   }
 }
 
@@ -171,8 +171,13 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               let res = ExtractEmail.String($.html(),atwords,dotwords);
               if(res.length>0){
                 res.forEach((item, i) => {
-                  if (varEmails.indexOf(item.email) == -1)
-                    varEmails.push(item.email);
+
+                  if(checkemailtype(item.email)){
+                    if (varEmails.indexOf(item.email) == -1)
+                      varEmails.push(item.email);
+                  }
+
+
                 });
               }
 
