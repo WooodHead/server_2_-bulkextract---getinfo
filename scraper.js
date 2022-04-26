@@ -23,14 +23,11 @@ function ValidateEmail(mail) {
   // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
     if (mail.slice(-3) === "jpg") {
       return false;
-      if (mail.slice(-4) === "jpeg") {
-        return false;
-        if (mail.slice(-3) === "png") {
-          return false;
-    // } else if (mail.slice(-4) === "jpeg") {
-    //   return false;
-    // } else if (mail.slice(-3) === "png") {
-    //   return false;
+
+    } else if (mail.slice(-4) === "jpeg") {
+      return false;
+    } else if (mail.slice(-3) === "png") {
+      return false;
     // } else if (mail.slice(-3) === "gif") {
     //   return false;
     // } else if (mail.slice(-3) === "css") {
