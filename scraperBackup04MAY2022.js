@@ -23,21 +23,36 @@ function ValidateEmail(mail) {
   // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
     if (mail.slice(-3) === "jpg") {
       return false;
+
     } else if (mail.slice(-4) === "jpeg") {
       return false;
     } else if (mail.slice(-3) === "png") {
       return false;
-    // } else if (mail.slice(-11) === "example.com") {
+    // } else if (mail.slice(-3) === "gif") {
     //   return false;
+    // } else if (mail.slice(-3) === "css") {
+    //   return false;
+    // } else if (mail.slice(-4) === "html") {
+    //   return false;
+    } else if (mail.slice(-11) === "example.com") {
+      return false;
     } else if (mail.slice(-9) === "email.com") {
       return false;
     } else if (mail.slice(-9) === "sentry.io") {
       return false;
     } else if (mail.slice(-12) === "wixpress.com") {
       return false;
+
+    // } else if (mail.slice(-2) === "js") {
+    //   return false;
+    // } else if (mail.slice(-4) === "jpeg") {
+    //   return false;
     } else {
       return true;
     }
+  // } else {
+  //   return false;
+  // }
 }
 
 const validateEmail = (email) => {
@@ -52,12 +67,11 @@ function checkemailtype(email) {
   if (email.match(/\.(jpe?g|png|pdf|jpg|webp|html|htm|js|css|io|gif)$/)) {
     return false;
   } else {
-    // if (ValidateEmail(email)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return true
+    if (ValidateEmail(email)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -161,11 +175,10 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               let dotwords = [".","[dot]","-dot-"];
               let atwords = ["@","[at]","-at-"];
               let res = ExtractEmail.String($.html(),atwords,dotwords);
-
               if(res.length>0){
                 res.forEach((item, i) => {
 
-                  if(checkemailtype(item.email)){
+                  if(ValidateEmail(item.email)){
                     if (varEmails.indexOf(item.email) == -1)
                       varEmails.push(item.email);
                   }
@@ -182,18 +195,8 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
                 if (varEmails.indexOf(cfDecodeEmail(result[2][1])) == -1)
                   varEmails.push(cfDecodeEmail(result[2][1]));
 
+                console.log(link.attribs);
               });
-              $('a[href^="mailto:"]').each((i, link) => {
-                // const href = link.attribs.href;
-                // var thref = href.substring(4);
-                var tdataarray = [link.attribs.href.substring(7)];
-                tdataarray.forEach(function (value) {
-                  if (varEmails.indexOf(value) == -1) varEmails.push(value);
-                });
-              });
-
-
-
 
               $("span").each(function () {
                 var result = $(this).attr("data-cfemail");
@@ -208,6 +211,8 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
                 $('a[href^="tel:"]').each((i, link) => {
                   // const href = link.attribs.href;
                   // var thref = href.substring(4);
+
+
                   var tdataarray = [link.attribs.href.substring(4)];
                   tdataarray.forEach(function (value) {
                     if (varPhones.indexOf(value) == -1) varPhones.push(value);
