@@ -188,7 +188,11 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
                 // var thref = href.substring(4);
                 var tdataarray = [link.attribs.href.substring(7)];
                 tdataarray.forEach(function (value) {
-                  if (varEmails.indexOf(value) == -1) varEmails.push(value);
+                  console.log(value)
+                  if(validateEmail(value)){
+                    if (varEmails.indexOf(value) == -1) varEmails.push(value);
+
+                  }
                 });
               });
 
