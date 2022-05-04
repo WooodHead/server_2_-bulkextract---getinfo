@@ -165,7 +165,7 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
               if(res.length>0){
                 res.forEach((item, i) => {
 
-                  if(checkemailtype(item.email)){
+                  if(ValidateEmail(item.email)){
                     if (varEmails.indexOf(item.email) == -1)
                       varEmails.push(item.email);
                   }
