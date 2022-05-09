@@ -35,6 +35,8 @@ function ValidateEmail(mail) {
       return false;
     } else if (mail.slice(-12) === "wixpress.com") {
       return false;
+    } else if (mail.slice(-10) === "sentry.com") {
+      return false;
     } else {
       return true;
     }
@@ -411,12 +413,14 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
       // Queue a list of URLs
       c.queue([
         "http://" + domain,
-        // "http://" + domain + "/contact-us/",
-        // "http://" + domain + "/contactus/",
-        // "http://" + domain + "/contact/",
-        // "http://" + domain + "/pages/contact-us/",
-        // "http://" + domain + "/pages/contactus/",
-        // "http://" + domain + "/pages/contact/",
+        "http://" + domain + "/contact-us",
+        "http://" + domain + "/contactus",
+        "http://" + domain + "/contact",
+        "http://" + domain + "/contacs",
+
+        "http://" + domain + "/pages/contact-us",
+        "http://" + domain + "/pages/contactus",
+        "http://" + domain + "/pages/contact",
       ]);
     }
 
@@ -439,17 +443,18 @@ function extractdomain(domain, extracttype, extractphone, extractsocial) {
       // ]);
 
       c.queue([{ uri: "http://" + domain, jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/contact-us/", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/contact-us.html/", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/contactus/", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/contact/", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/contact-us", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/contact-us.html", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/contactus", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/contact", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/contacts", jQuery: true }]);
       c.queue([{ uri: "http://" + domain + "/contact-us.php", jQuery: true }]);
       c.queue([{ uri: "http://" + domain + "/contact-us.php", jQuery: true }]);
       c.queue([{ uri: "http://" + domain + "/contactus.php", jQuery: true }]);
       c.queue([{ uri: "http://" + domain + "/contact.php", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/pages/contact-us/", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/pages/contactus/", jQuery: true }]);
-      c.queue([{ uri: "http://" + domain + "/pages/contact/", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/pages/contact-us", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/pages/contactus", jQuery: true }]);
+      c.queue([{ uri: "http://" + domain + "/pages/contact", jQuery: true }]);
       // c.queue([{ uri: "http://" + domain + "/about-us/", jQuery: true }]);
       // c.queue([{ uri: "http://" + domain + "/aboutus/", jQuery: true }]);
       // c.queue([{ uri: "http://" + domain + "/about/", jQuery: true }]);
